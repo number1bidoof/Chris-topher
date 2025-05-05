@@ -44,11 +44,23 @@ function cycleAspect() {
                 const classImage = document.getElementById('class-image');
                 classImage.src = `${selectedAspects[0].toLowerCase()}-image.png`;
                 classImage.style.display = "block";
+
+                document.querySelector('.nextPage1').style.display = 'inline-block';
             }
         }
     }, 100);
 }
 
+
+function nextPage1() {
+    window.location.href = 'boss1.html';
+}
+
 function startGame() {
     window.location.href = 'character.html';
+}
+
+
+function restartGame() {
+    window.location.href = 'index.html'
 }

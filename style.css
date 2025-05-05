@@ -23,7 +23,6 @@ body {
     border: none;
     background-color: #e94560;
     color: white;
-    transition: background-color 0.3s ease;
 }
 
 .begin-button:hover {
@@ -58,4 +57,30 @@ body {
 .moon-button img {
     width: 150px;
     height: auto;
+}
+
+.restart-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 15px 30px;
+    font-size: 14px;
+    border-radius: 8px;
+    background-color:#e94560 ;
+    color: white;
+}
+
+.restart-button:hover {
+    background-color: #0f3460;
+}
+
+.nextPage1 {
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    padding: 15px 30px;
+    font-size: 14px;
+    border-radius: 8px;
+    background-color:#e94560 ;
+    color: white;
 }
