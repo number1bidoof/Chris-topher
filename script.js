@@ -265,6 +265,13 @@ function nextPage1() {
     window.location.href = 'boss1.html';
 }
 
+function nextPage2() {
+    localStorage.setItem('hero', JSON.stringify(hero));
+    localStorage.setItem('villain', JSON.stringify(chikawa));
+
+    window.location.href = 'boss2.html';
+}
+
 
 function startGame() {
     window.location.href = 'character.html';
