@@ -64,6 +64,10 @@ function cycleAspect() {
             moonButton.children[0].src = 'Art/moon_basic.png'; // reset the image
 
             if (currentAspect >= aspectTypes.length) {
+                music1.pause();
+                const music2 = new Audio('Music/Battle.mp3');
+                music2.loop = true;
+                music2.play();
                 moonButton.disabled = true;
                 displayElement.innerHTML = 
                 // I use span here to color the text and not interfere with the HTML structure
@@ -77,7 +81,7 @@ function cycleAspect() {
                 ITEM: ${selectedAspects[5]}`;
 
                 const classImage = document.getElementById('class-image');
-                classImage.src = `${selectedAspects[0].toLowerCase()}-image.png`;
+                classImage.src = `Art/${selectedAspects[0].toLowerCase()}-image.png`;
                 classImage.style.display = "block";
 
                 document.querySelector('.nextPage1').style.display = 'inline-block';
@@ -86,10 +90,10 @@ function cycleAspect() {
     }, 100);
 }
 
-const music = new Audio('Music/Menu.mp3');
+const music1 = new Audio('Music/Menu.mp3');
 document.querySelector('button').addEventListener('click', () => {
-    music.loop = true;
-    music.play();
+    music1.loop = true;
+    music1.play();
 });
 
 function nextPage1() {
