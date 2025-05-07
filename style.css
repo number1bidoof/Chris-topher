@@ -7,6 +7,9 @@ body {
     font-family: 'Quicksand', bold;
     text-align: center;
     color: white;
+    background-image: url('Art/background_large.png');
+    background-repeat: 'no-repeat';
+    background-size: auto;
 }
 
 
@@ -18,17 +21,20 @@ body {
 }
 
 .begin-button {
+    font-family: 'Quicksand', bold;
     padding: 15px 30px;
     font-size: 24px;
     cursor: pointer;
     border-radius: 8px;
     border: none;
-    background-color: #e94560;
+    background-color: #3FA0A4;
     color: white;
 }
 
 .begin-button:hover {
-    background-color: #0f3460;
+    font-family: 'Quicksand', 'italics';
+    color: #eee98a;
+    background-color: #9F3C91;
 }
 
 .character-container {
