@@ -1,10 +1,12 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 body {
     margin: 0;
     padding: 0;
     background-color: #1a1a2e;
-    font-family: 'Quicksand', bold;
+    font-family: 'Press Start 2P', bold;
     text-align: center;
     color: white;
     background-image: url('Art/background_large.png');
@@ -12,6 +14,13 @@ body {
     background-size: auto;
 }
 
+.bios-background {
+    background-image: url('Art/Background_2.png');
+    background-repeat: 'no-repeat';
+    font-family: 'Press Start 2P', 'bold';
+    color: #eee98a;
+    background-color: #9F3C91;
+}
 
 .begin-container {
     display: flex;
@@ -74,12 +83,12 @@ body {
     padding: 15px 30px;
     font-size: 14px;
     border-radius: 8px;
-    background-color:#e94560 ;
+    background-color:#3FA0A4 ;
     color: white;
 }
 
 .restart-button:hover {
-    background-color: #0f3460;
+    background-color: #9F3C91;
 }
 
 .nextPage1 {
@@ -89,7 +98,7 @@ body {
     padding: 15px 30px;
     font-size: 14px;
     border-radius: 8px;
-    background-color:#e94560 ;
+    background-color:#3FA0A4 ;
     color: white;
 }
 
