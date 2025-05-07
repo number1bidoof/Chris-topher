@@ -157,6 +157,7 @@ function startBossFight() {
     hero = JSON.parse(heroObjString);
     villain = JSON.parse(villainObjString);
 
+
     const didWin = bossFight(hero, villain);
 
     if (didWin) {
