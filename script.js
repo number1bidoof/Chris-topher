@@ -1,4 +1,4 @@
-let currentAspect = 0; // varible storing current ascpets
+let currentAspect = 0;
 
 const aspectTypes = [
     ["Knight", "Ninja", "Wizard", "Monk"], // Classes
@@ -9,9 +9,45 @@ const aspectTypes = [
     ["Sword", "Potion", "Stick", "Bomb", "Compass", "Dirt", "Money", "Ice"] // Items
 ];
 
-const classColors = {
+class Person {
+    constructor() {
+        this.class = ''
+        this.strength = ''
+        this.speed = ''
+        this.intelligence = ''
+        this.ability = ''
+        this.item = ''
+    }
+}
 
-}; // colors ascoiated with those classses
+const chikawa = new Person();
+chikawa.class = "Ninja"; 
+chikawa.strength = "LOW";
+chikawa.speed = "Average";
+chikawa.intelligence = "LOW";
+chikawa.ability = "Teleportation";
+chikawa.item = "Basic Sword";
+
+//BOSS 2
+// const shaggy = new Person();
+// chikawa.class = "Monk"; 
+// chikawa.strength = "LOW";
+// chikawa.speed = "High";
+// chikawa.intelligence = "LOW";
+// chikawa.ability = "Teleportation";
+// chikawa.item = "Basic Sword";
+
+// //BOSS 3
+// const christopher = new Person();
+// chikawa.class = "Wizard"; 
+// chikawa.strength = "UNIVERSAL";
+// chikawa.speed = "EPIC";
+// chikawa.intelligence = "UNIVERSAL";
+// chikawa.ability = "Super Strength";
+// chikawa.item = "Basic Sword";
+// const classColors = {
+
+// };
 
 const aspectColors = {
     "Knight": "red",
@@ -25,22 +61,25 @@ const aspectColors = {
     "EPIC": "purple",
     "DIVINE": "gold",
     "UNIVERSAL": "pink"
-}; // Object storing the colors assoiated with properties
+};
 
 const aspectLabels = ["CLASS", "STRENGTH", "SPEED", "INTELLIGENCE", "ABILITY", "ITEM"];
+
+let hero = new Person();
+let villain = new Person();
 
 let selectedAspects = [];
 
 function cycleAspect() {
     const moonButton = document.querySelector('.moon-button');
     // Gabe adding stuff to make the moon spin (accessing the image inside of the button) 
-    moonButton.children[0].src = 'Art/moon_animation.gif'; // load in the moon gif
+    moonButton.children[0].src = 'Art/moon_animation.gif';
 
-    let cycleCount = 0; // stores cycles
-    const displayElement = document.getElementById('aspect-name'); 
+    let cycleCount = 0;
+    const displayElement = document.getElementById('aspect-name');
 
     const interval = setInterval(() => {
-        const click = new Audio('Music/ClickSFX.mp3'); //play music when the moon is pressed 
+        const click = new Audio('Music/ClickSFX.mp3');
         click.play();
         const aspectsArray = aspectTypes[currentAspect];
         const randomAspect = aspectsArray[Math.floor(Math.random() * aspectsArray.length)];
@@ -48,7 +87,7 @@ function cycleAspect() {
         displayElement.innerHTML = `${aspectLabels[currentAspect]}: <span style="color: ${aspectColors[randomAspect]}">${randomAspect}</span>`;
         cycleCount++;
 
-        if (moonButton) { // if the button was pressed 
+        if (moonButton) {
             moonButton.disabled = true;
             moonButton.style.opacity = "0.5"; //  show it's disabled
         }
@@ -69,6 +108,14 @@ function cycleAspect() {
                 music2.loop = true;
                 music2.play();
                 moonButton.disabled = true;
+                hero.class = selectedAspects[0];
+                hero.strength = selectedAspects[1];
+                hero.speed = selectedAspects[2];
+                hero.intelligence = selectedAspects[3];
+                hero.ability = selectedAspects[4];
+                hero.item = selectedAspects[5];
+                
+                
                 displayElement.innerHTML = 
                 // I use span here to color the text and not interfere with the HTML structure
                 `
@@ -90,15 +137,134 @@ function cycleAspect() {
     }, 100);
 }
 
+
+
+//reutrns true if hero wins
+//returns false if villain wins
+function bossFight(hero, villain) {
+    let heroValue = calcualteFightValue(hero);
+    let villainValue = calcualteFightValue(villain);
+
+    return heroValue > villainValue;
+}
+//Just make 2 more of these for the next boss fights
+function startBossFight() { 
+    const resultDisplay = document.getElementById('battle-result');
+
+    const heroObjString = localStorage.getItem('hero');
+    const villainObjString = localStorage.getItem('villain');
+
+    hero = JSON.parse(heroObjString);
+    villain = JSON.parse(villainObjString);
+
+    const didWin = bossFight(hero, villain);
+
+    if (didWin) {
+        resultDisplay.innerHTML = "<strong>You beat Chikawa.</strong>";
+        document.querySelector('.nextPage2').style.display = 'inline-block';
+    } else {
+        resultDisplay.innerHTML = "<strong>You were defeated by Chikawa. HAHA! LOSER!</strong>";
+    }
+
+}
+
+function calcualteFightValue(person) {
+    let fightSum = 0;
+
+    let strength = 1;
+    let speed = 1;
+    let intelligence = 1;
+
+    strength += findAspectValue(aspectTypes[1], person.strength);
+    speed += findAspectValue(aspectTypes[2], person.speed);
+    intelligence += findAspectValue(aspectTypes[3], person.intelligence);
+
+    switch (person.ability) {
+        case "Super Strength":
+            strength += strength * 1.5;
+            break;
+
+        case "Invisibility":
+        case "Teleportation":
+            speed += speed * 1.5;
+            intelligence += intelligence * 1.2;
+            break;
+
+        case "Invisibility":
+            intelligence += intelligence * 1.5;
+            break;
+    }
+
+    switch (person.item) {
+        case "Basic Sword":
+            strength += strength * 1.5;
+            break;
+
+        case "Speed Potion":
+            speed += speed * 2;
+            break;
+
+        case "Long Sword":
+            strength += strength * 2;
+            break;
+
+        case "Jordans":
+            speed += speed * 3;
+            break;
+
+        case "Thinking Hat":
+            intelligence += intelligence * 3;
+            break;
+
+        case "JS textbook":
+            intelligence += intelligence * 4;
+            break;
+    }
+
+    switch(person.class) {
+        case "Knight":
+            strength += strength * 2;
+            break;
+
+        case "Ninja":
+            speed += speed * 2;
+            break;
+
+        case "Wizard":
+            intelligence += intelligence * 2;
+            break;
+
+        case "Monk":
+            strength += strength * 1.5;
+            intelligence += intelligence * 1.5;
+            break;
+    }
+
+    return strength + speed + intelligence;
+}
+
+function findAspectValue(aspects, value) {
+    const index = aspects.indexOf(value); // index will be 1
+
+    if (index >= 0) {
+        return index;
+    } else {
+        return 0;
+    }
+}
 const music1 = new Audio('Music/Menu.mp3');
 document.querySelector('button').addEventListener('click', () => {
     music1.loop = true;
-    music1.play(); // play the menu music after the charater is selected 
+    music1.play();
 });
 
 function nextPage1() {
+    localStorage.setItem('hero', JSON.stringify(hero));
+    localStorage.setItem('villain', JSON.stringify(chikawa));
+
     window.location.href = 'boss1.html';
 }
+
 
 function startGame() {
     window.location.href = 'character.html';
