@@ -1,4 +1,4 @@
-let currentAspect = 0;
+let currentAspect = 0; // varible storing current ascpets
 
 const aspectTypes = [
     ["Knight", "Ninja", "Wizard", "Monk"], // Classes
@@ -11,7 +11,7 @@ const aspectTypes = [
 
 const classColors = {
 
-};
+}; // colors ascoiated with those classses
 
 const aspectColors = {
     "Knight": "red",
@@ -25,7 +25,7 @@ const aspectColors = {
     "EPIC": "purple",
     "DIVINE": "gold",
     "UNIVERSAL": "pink"
-};
+}; // Object storing the colors assoiated with properties
 
 const aspectLabels = ["CLASS", "STRENGTH", "SPEED", "INTELLIGENCE", "ABILITY", "ITEM"];
 
@@ -34,13 +34,13 @@ let selectedAspects = [];
 function cycleAspect() {
     const moonButton = document.querySelector('.moon-button');
     // Gabe adding stuff to make the moon spin (accessing the image inside of the button) 
-    moonButton.children[0].src = 'Art/moon_animation.gif';
+    moonButton.children[0].src = 'Art/moon_animation.gif'; // load in the moon gif
 
-    let cycleCount = 0;
-    const displayElement = document.getElementById('aspect-name');
+    let cycleCount = 0; // stores cycles
+    const displayElement = document.getElementById('aspect-name'); 
 
     const interval = setInterval(() => {
-        const click = new Audio('Music/ClickSFX.mp3');
+        const click = new Audio('Music/ClickSFX.mp3'); //play music when the moon is pressed 
         click.play();
         const aspectsArray = aspectTypes[currentAspect];
         const randomAspect = aspectsArray[Math.floor(Math.random() * aspectsArray.length)];
@@ -48,7 +48,7 @@ function cycleAspect() {
         displayElement.innerHTML = `${aspectLabels[currentAspect]}: <span style="color: ${aspectColors[randomAspect]}">${randomAspect}</span>`;
         cycleCount++;
 
-        if (moonButton) {
+        if (moonButton) { // if the button was pressed 
             moonButton.disabled = true;
             moonButton.style.opacity = "0.5"; //  show it's disabled
         }
@@ -93,7 +93,7 @@ function cycleAspect() {
 const music1 = new Audio('Music/Menu.mp3');
 document.querySelector('button').addEventListener('click', () => {
     music1.loop = true;
-    music1.play();
+    music1.play(); // play the menu music after the charater is selected 
 });
 
 function nextPage1() {
