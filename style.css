@@ -1,10 +1,12 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 body {
     margin: 0;
     padding: 0;
     background-color: #1a1a2e;
-    font-family: 'Arial', sans-serif;
-    color: white;
+    font-family: 'Quicksand', bold;
     text-align: center;
+    color: white;
 }
 
 
@@ -55,7 +57,7 @@ body {
 }
 
 .moon-button img {
-    width: 150px;
+    width: auto;
     height: auto;
 }
 
