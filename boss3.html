@@ -3,9 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Boss Battle: Shaggy</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <div class="boss-container">
+        <h1>Boss Battle: Christopher</h1>
+        
+        <div class="battle-area">
+            <div class="player-section">
+                <h2>Your Hero</h2>
+                <img id="player-image" src="">
+            </div>
+        
+            <div class="boss-section">
+                <h2>Shaggy</h2>
+                <img id="boss-image" src="Art/Christopher.png">
+            </div>
+        </div>
+        
+
+        <div class="battle-result" id="battle-result">
+            <p>Ready for Battle!</p>
+        </div>
+
+        <button onclick="startBossFight3()">FIGHT</button>
+        <button class="restart-button" onclick="restartGame()">RESTART</button>
+        <button class="nextPage2" onclick="nextPage3()" style="display: none;">NEXT</button> <!--ADD THE VICTORY PAGE HERE. CHANGE THE ONCLICK TO A FUNCTION THAT TAKES PLAYER TO VICTORY PAGE GABE-->
+    </div>
+
+    <script>
+    window.onload = function(){
+        const heroObjString = localStorage.getItem('hero');
+        const villainObjString = localStorage.getItem('villain3');
+        hero = JSON.parse(heroObjString);
+        console.log(hero)
+        const classImage = document.getElementById('player-image');
+        classImage.src = `Art/${hero.class.toLowerCase()}-image.png`;
+        classImage.style.display = "block";
+    }
+    </script> 
+
+    <script src="script.js"></script>
 </body>
 </html>

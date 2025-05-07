@@ -6,7 +6,7 @@ const aspectTypes = [
     ["LOW", "AVERAGE", "HIGH", "EPIC", "DIVINE", "UNIVERSAL"], // Speed
     ["LOW", "AVERAGE", "HIGH", "EPIC", "DIVINE", "UNIVERSAL"], // Intelligence
     ["Super Strength", "Invisibility", "Teleportation", "Healing"], // Abilities
-    ["Sword", "Potion", "Stick", "Bomb", "Compass", "Dirt", "Money", "Ice"] // Items
+    ["Basic Sword", "Speed Potion", "Long Sword", "Jordans", "Thinking Hat", "JS textbook"] // Items
 ];
 
 class Person {
@@ -23,31 +23,32 @@ class Person {
 const chikawa = new Person();
 chikawa.class = "Ninja"; 
 chikawa.strength = "LOW";
-chikawa.speed = "Average";
+chikawa.speed = "AVERAGE";
 chikawa.intelligence = "LOW";
 chikawa.ability = "Teleportation";
 chikawa.item = "Basic Sword";
 
 // BOSS 2
 const shaggy = new Person();
-shaggy.class = "Monk"; 
-shaggy.strength = "Divine";
-shaggy.speed = "Divine";
-shaggy.intelligence = "Divine";
+shaggy.class = "Knight"; 
+shaggy.strength = "EPIC";
+shaggy.speed = "EPIC";
+shaggy.intelligence = "AVERAGE";
 shaggy.ability = "Teleportation";
 shaggy.item = "Jordans";
 
 // //BOSS 3
-// const christopher = new Person();
-// chikawa.class = "Wizard"; 
-// chikawa.strength = "UNIVERSAL";
-// chikawa.speed = "EPIC";
-// chikawa.intelligence = "UNIVERSAL";
-// chikawa.ability = "Super Strength";
-// chikawa.item = "Basic Sword";
-// const classColors = {
+const christopher = new Person();
+christopher.class = "Wizard"; 
+christopher.strength = "UNIVERSAL";
+christopher.speed = "EPIC";
+christopher.intelligence = "UNIVERSAL";
+christopher.ability = "Super Strength";
+christopher.item = "Thinking Hat";
 
-// };
+const classColors = {
+
+};
 
 const aspectColors = {
     "Knight": "red",
@@ -182,6 +183,27 @@ function startBossFight2() {
     const didWin = bossFight(hero, villain);
 
     if (didWin) {
+        resultDisplay.innerHTML = "<strong>You beat Shaggy.</strong>";
+        document.querySelector('.nextPage2').style.display = 'inline-block';
+    } else {
+        resultDisplay.innerHTML = "<strong>You were defeated by Shaggy. HAHA! LOSER!</strong>";
+    }
+
+}
+
+function startBossFight3() { 
+    const resultDisplay = document.getElementById('battle-result');
+
+    const heroObjString = localStorage.getItem('hero');
+    const villainObjString = localStorage.getItem('villain3');
+
+    hero = JSON.parse(heroObjString);
+    villain = JSON.parse(villainObjString);
+
+
+    const didWin = bossFight(hero, villain);
+
+    if (didWin) {
         resultDisplay.innerHTML = "<strong>You beat Christopher.</strong>";
         document.querySelector('.nextPage2').style.display = 'inline-block';
     } else {
@@ -296,7 +318,7 @@ function nextPage2() {
 
 function nextPage3() {
     localStorage.setItem('hero', JSON.stringify(hero));
-    //localStorage.setItem('villain', JSON.stringify(chikawa));
+    localStorage.setItem('villain3', JSON.stringify(christopher));
 
     window.location.href = 'boss3.html';
 }
