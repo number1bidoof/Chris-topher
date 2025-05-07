@@ -32,6 +32,18 @@
         <button class="nextPage2" onclick="nextPage2()" style="display: none;">NEXT</button>
     </div>
 
+    <script>
+    window.onload = function(){
+        const heroObjString = localStorage.getItem('hero');
+        const villainObjString = localStorage.getItem('villain');
+        hero = JSON.parse(heroObjString);
+        console.log(hero)
+        const classImage = document.getElementById('player-image');
+        classImage.src = `Art/${hero.class.toLowerCase()}-image.png`;
+        classImage.style.display = "block";
+    }
+    </script> 
+
     <script src="script.js"></script>
 </body>
 </html>
