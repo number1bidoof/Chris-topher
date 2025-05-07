@@ -1,4 +1,4 @@
-# *Christ-opher: A game where everything is *random** 
+# *Christ-opher: A game where everything is __random__* 
 
 When your playing any game, most people think of strategies to win. Everyone has thier own charter that they fine-tuned and practiced with every single time they play a game
 
