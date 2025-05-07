@@ -28,14 +28,14 @@ chikawa.intelligence = "LOW";
 chikawa.ability = "Teleportation";
 chikawa.item = "Basic Sword";
 
-//BOSS 2
-// const shaggy = new Person();
-// chikawa.class = "Monk"; 
-// chikawa.strength = "LOW";
-// chikawa.speed = "High";
-// chikawa.intelligence = "LOW";
-// chikawa.ability = "Teleportation";
-// chikawa.item = "Basic Sword";
+// BOSS 2
+const shaggy = new Person();
+shaggy.class = "Monk"; 
+shaggy.strength = "Divine";
+shaggy.speed = "Divine";
+shaggy.intelligence = "Divine";
+shaggy.ability = "Teleportation";
+shaggy.item = "Jordans";
 
 // //BOSS 3
 // const christopher = new Person();
@@ -169,6 +169,27 @@ function startBossFight() {
 
 }
 
+function startBossFight2() { 
+    const resultDisplay = document.getElementById('battle-result');
+
+    const heroObjString = localStorage.getItem('hero');
+    const villainObjString = localStorage.getItem('villain2');
+
+    hero = JSON.parse(heroObjString);
+    villain = JSON.parse(villainObjString);
+
+
+    const didWin = bossFight(hero, villain);
+
+    if (didWin) {
+        resultDisplay.innerHTML = "<strong>You beat Christopher.</strong>";
+        document.querySelector('.nextPage2').style.display = 'inline-block';
+    } else {
+        resultDisplay.innerHTML = "<strong>You were defeated by Christopher. HAHA! LOSER!</strong>";
+    }
+
+}
+
 function calcualteFightValue(person) {
     let fightSum = 0;
 
@@ -268,9 +289,16 @@ function nextPage1() {
 
 function nextPage2() {
     localStorage.setItem('hero', JSON.stringify(hero));
-    localStorage.setItem('villain', JSON.stringify(chikawa));
+    localStorage.setItem('villain2', JSON.stringify(shaggy));
 
     window.location.href = 'boss2.html';
+}
+
+function nextPage3() {
+    localStorage.setItem('hero', JSON.stringify(hero));
+    //localStorage.setItem('villain', JSON.stringify(chikawa));
+
+    window.location.href = 'boss3.html';
 }
 
 
