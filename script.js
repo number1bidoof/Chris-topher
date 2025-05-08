@@ -23,7 +23,7 @@ class Person {
         this.item = ''
     }
 }
-
+// BOSS 1
 const chiikawa = new Person();
 chiikawa.class = "Ninja"; 
 chiikawa.strength = "LOW";
@@ -53,8 +53,8 @@ christopher.item = "Thinking Hat";
 const classColors = {
 
 };
-
-const aspectColors = {
+// aspect colors for the associated aspects
+const aspectColors = { 
     "Knight": "red",
     "Ninja": "blue",
     "Monk": "orange",
@@ -68,14 +68,14 @@ const aspectColors = {
     "UNIVERSAL": "pink"
 };
 
-const aspectLabels = ["CLASS", "STRENGTH", "SPEED", "INTELLIGENCE", "ABILITY", "ITEM"];
+const aspectLabels = ["CLASS", "STRENGTH", "SPEED", "INTELLIGENCE", "ABILITY", "ITEM"]; // aspect labels
 
-let hero = new Person();
-let villain = new Person();
+let hero = new Person(); // hero object
+let villain = new Person(); // villan object
 
 let selectedAspects = [];
 
-function cycleAspect() {
+function cycleAspect() { // cyclying function
     const moonButton = document.querySelector('.moon-button');
     // Gabe adding stuff to make the moon spin (accessing the image inside of the button) 
     moonButton.children[0].src = 'Art/moon_animation.gif';
@@ -84,13 +84,13 @@ function cycleAspect() {
     const displayElement = document.getElementById('aspect-name');
 
     const interval = setInterval(() => {
-        const click = new Audio('Music/ClickSFX.mp3');
-        click.play();
+        const click = new Audio('Music/ClickSFX.mp3'); // stores audio
+        click.play(); // plays click audio 
         const aspectsArray = aspectTypes[currentAspect];
         const randomAspect = aspectsArray[Math.floor(Math.random() * aspectsArray.length)];
 
         displayElement.innerHTML = `${aspectLabels[currentAspect]}: <span style="color: ${aspectColors[randomAspect]}">${randomAspect}</span>`;
-        cycleCount++;
+        cycleCount++; //adds to cycle
 
         if (moonButton) {
             moonButton.disabled = true;
@@ -98,7 +98,7 @@ function cycleAspect() {
         }
 
         if (cycleCount >= 20) {
-            switch (randomAspect) {
+            switch (randomAspect) { //switch case for music and rolling of values 
                 case "LOW":
                     new Audio('Music/BadSFX.mp3').play();
                     break;
@@ -131,20 +131,20 @@ function cycleAspect() {
                 musicMenu.pause();
                 musicBattle.play();
                 moonButton.remove()
-
+                // adds alll varribled to the hero class 
                 hero.class = selectedAspects[0];
                 hero.strength = selectedAspects[1];
                 hero.speed = selectedAspects[2];
                 hero.intelligence = selectedAspects[3];
                 hero.ability = selectedAspects[4];
                 hero.item = selectedAspects[5];
-                
+                // formats the background
                 document.body.style.backdropFilter = "blur(10px)";
                 document.body.style.borderRadius = "15px";
                 document.body.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
                 
                 displayElement.innerHTML = 
-                // I use span here to color the text and not interfere with the HTML structure
+                // structured output for displaying information
                 `
                 <strong>CHARACTER ASPECTS:</strong><br>
                 CLASS: <span style="color: ${aspectColors[selectedAspects[0]] }">${selectedAspects[0]}</span><br>
@@ -174,10 +174,10 @@ function bossFight(hero, villain) {
 
     return heroValue > villainValue;
 }
-//Just make 2 more of these for the next boss fights
+// BOSS 1 vs Chiikawa
 function startBossFight() { 
-    musicBattle.play();
-    const resultDisplay = document.getElementById('battle-result');
+    musicBattle.play(); // plays boss mysic 
+    const resultDisplay = document.getElementById('battle-result'); // displays results 
 
     const heroObjString = localStorage.getItem('hero');
     const villainObjString = localStorage.getItem('villain');
@@ -186,12 +186,12 @@ function startBossFight() {
     villain = JSON.parse(villainObjString);
 
 
-    const didWin = bossFight(hero, villain);
+    const didWin = bossFight(hero, villain); // boss fight constructor 
 
-    if (didWin) {
+    if (didWin) { // if we won
         resultDisplay.innerHTML = "<strong>You beat chiikawa.</strong>";
         document.querySelector('.nextPage2').style.display = 'inline-block';
-    } else {
+    } else { // if we didnt win
         failed = true; 
         fail.play();
         musicBattle.pause();
@@ -199,7 +199,7 @@ function startBossFight() {
     }
 
 }
-
+// BOSS 2 v Mr.Gardner 
 function startBossFight2() { 
     const resultDisplay = document.getElementById('battle-result');
 
@@ -210,7 +210,7 @@ function startBossFight2() {
     villain = JSON.parse(villainObjString);
 
 
-    const didWin = bossFight(hero, villain);
+    const didWin = bossFight(hero, villain); // boss fight constructor 
 
     if (didWin) {
         resultDisplay.innerHTML = "<strong>You beat ethan.</strong>";
@@ -227,7 +227,7 @@ function startBossFight2() {
 
 }
 
-function startBossFight3() { 
+function startBossFight3() {  // BOSS 3 vs Christopher
     const resultDisplay = document.getElementById('battle-result');
 
     const heroObjString = localStorage.getItem('hero');
@@ -237,7 +237,7 @@ function startBossFight3() {
     villain = JSON.parse(villainObjString);
 
 
-    const didWin = bossFight(hero, villain);
+    const didWin = bossFight(hero, villain); // boss fight constructor 
 
     if (didWin) {
         resultDisplay.innerHTML = "<strong>You beat Christopher.</strong>";
@@ -251,18 +251,18 @@ function startBossFight3() {
 
 }
 
-function calcualteFightValue(person) {
+function calcualteFightValue(person) { // calculator for fighting abilities
+    // given varribles
     let fightSum = 0;
-
     let strength = 1;
     let speed = 1;
     let intelligence = 1;
 
-    strength += findAspectValue(aspectTypes[1], person.strength);
-    speed += findAspectValue(aspectTypes[2], person.speed);
-    intelligence += findAspectValue(aspectTypes[3], person.intelligence);
+    strength += findAspectValue(aspectTypes[1], person.strength); // storing strength in the person object
+    speed += findAspectValue(aspectTypes[2], person.speed); // storing speed in the person object
+    intelligence += findAspectValue(aspectTypes[3], person.intelligence); // storing intelligence in the person object
 
-    switch (person.ability) {
+    switch (person.ability) { // switch case for special abilities
         case "Super Strength":
             strength += strength * 1.5;
             break;
@@ -278,7 +278,7 @@ function calcualteFightValue(person) {
             break;
     }
 
-    switch (person.item) {
+    switch (person.item) { // switch case storing items and values for those items
         case "Basic Sword":
             strength += strength * 1.5;
             break;
@@ -304,7 +304,7 @@ function calcualteFightValue(person) {
             break;
     }
 
-    switch(person.class) {
+    switch(person.class) { //switch case for each persons class
         case "Knight":
             strength += strength * 2;
             break;
@@ -337,9 +337,9 @@ function findAspectValue(aspects, value) {
 }
 
 
-const fail = new Audio('Music/Death.mp3');
-const musicMenu = new Audio('Music/Menu.mp3');
-const musicBattle = new Audio('Music/Battle.mp3');
+const fail = new Audio('Music/Death.mp3'); // fail music
+const musicMenu = new Audio('Music/Menu.mp3'); // main menu music 
+const musicBattle = new Audio('Music/Battle.mp3'); // battle music
 musicMenu.loop = true;
 musicBattle.loop = true;
 if (document.querySelector('.moon-button')) { // If moon button exists, add event listener
@@ -356,7 +356,7 @@ if (document.querySelector('.fight-button')) { // If fight button exists, add ev
 }
 
 
-function nextPage1() {
+function nextPage1() { // BOSS 1 screen
     localStorage.setItem('hero', JSON.stringify(hero));
     localStorage.setItem('villain', JSON.stringify(chiikawa));
 
@@ -365,32 +365,32 @@ function nextPage1() {
     musicBattle.play();
 }
 
-function nextPage2() {
+function nextPage2() { // BOSS 2 Screen
     localStorage.setItem('hero', JSON.stringify(hero));
     localStorage.setItem('villain2', JSON.stringify(ethan));
 
     window.location.href = 'boss2.html';
 }
 
-function nextPage3() {
+function nextPage3() { // BOSS 3 screen
     localStorage.setItem('hero', JSON.stringify(hero));
     localStorage.setItem('villain3', JSON.stringify(christopher));
 
     window.location.href = 'boss3.html';
 }
 
-function nextPage4() {
+function nextPage4() { // winning screen
     localStorage.setItem('hero', JSON.stringify(hero));
     localStorage.setItem('villain3', JSON.stringify(christopher));
 
     window.location.href = 'win.html';
 }
 
-function startGame() {
+function startGame() { // starting function
     window.location.href = 'character.html';
     
 }
 
-function restartGame() {
+function restartGame() { // restart function
     window.location.href = 'index.html'
 }
