@@ -1,5 +1,4 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 body {
@@ -10,16 +9,44 @@ body {
     text-align: center;
     color: white;
     background-image: url('Art/background_large.png');
-    background-repeat: 'no-repeat';
-    background-size: auto;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 .bios-background {
     background-image: url('Art/Background_2.png');
-    background-repeat: 'no-repeat';
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
     font-family: 'Press Start 2P', 'bold';
     color: #eee98a;
     background-color: #9F3C91;
+
+    /* I hated doing this. I hate color modulation. But i figured it out. I always do. Why did we have this. Anyway, it works. */
+
+    animation: image-tint 10s infinite alternate;
+
+    /* :( */
+}
+
+@keyframes image-tint {
+    0% {
+        filter: brightness(1) hue-rotate(0deg);
+    }
+    50% {
+        filter: brightness(1.2) hue-rotate(45deg);
+    }
+    100% {
+        filter: brightness(1) hue-rotate(0deg);
+    }
+}
+
+.battle-background {
+    background-image: url('Art/Background_2.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 .begin-container {
@@ -51,13 +78,14 @@ button {
 
 .character-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 50px;
-    height: 90vh;
+    height: 80vh;
 }
 
 .aspect-display {
+    display: flex;
     flex: 1;
     text-align: left;
     padding-left: 50px;
@@ -131,8 +159,8 @@ button {
 
 .player-section img,
 .boss-section img {
-    width: 250px;
-    height: auto;
+    width: auto;
+    height: 400px;
     /*border: 3px solid #444;
     border-radius: 10px;
     background: #f0f0f0;*/

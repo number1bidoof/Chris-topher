@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIO</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bios-background">
+    <h1>YOU'VE DONE IT!</h1>
+    <h2>YOU HAVE DEFEATED THE SCRIPT KING!</h2>
+    <button class="music-button" onclick="playWinMusic()">
+        <img src="Art/Chris.png" alt="Victory Image" style="width:300px;height:auto;background:none;">
+    </button>
+    <br>
+    <a href = "index.html">
+        <button>Go back</button>
+    </a>
+    <script>
+        function playWinMusic() {
+            const audio = new Audio('Music/Yay.mp3');
+            audio.loop = true;
+            audio.play();
+        }
+        </script> 
+</body>
+</html>

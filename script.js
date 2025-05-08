@@ -1,3 +1,7 @@
+// This is Gabe writing this, Just adding that the music and sfx are done in this js file.
+// Thank you Lucas for being a good sport.
+
+let failed = false; // Variable to track if the player has failed
 let currentAspect = 0;
 
 const aspectTypes = [
@@ -20,22 +24,22 @@ class Person {
     }
 }
 
-const chikawa = new Person();
-chikawa.class = "Ninja"; 
-chikawa.strength = "LOW";
-chikawa.speed = "AVERAGE";
-chikawa.intelligence = "LOW";
-chikawa.ability = "Teleportation";
-chikawa.item = "Basic Sword";
+const chiikawa = new Person();
+chiikawa.class = "Ninja"; 
+chiikawa.strength = "LOW";
+chiikawa.speed = "AVERAGE";
+chiikawa.intelligence = "LOW";
+chiikawa.ability = "Teleportation";
+chiikawa.item = "Basic Sword";
 
 // BOSS 2
-const shaggy = new Person();
-shaggy.class = "Knight"; 
-shaggy.strength = "EPIC";
-shaggy.speed = "EPIC";
-shaggy.intelligence = "AVERAGE";
-shaggy.ability = "Teleportation";
-shaggy.item = "Jordans";
+const ethan = new Person();
+ethan.class = "Knight"; 
+ethan.strength = "EPIC";
+ethan.speed = "EPIC";
+ethan.intelligence = "AVERAGE";
+ethan.ability = "Teleportation";
+ethan.item = "Jordans";
 
 // //BOSS 3
 const christopher = new Person();
@@ -94,7 +98,26 @@ function cycleAspect() {
         }
 
         if (cycleCount >= 20) {
-            console.log("cycling")
+            switch (randomAspect) {
+                case "LOW":
+                    new Audio('Music/BadSFX.mp3').play();
+                    break;
+                case "AVERAGE":
+                    new Audio('Music/BadSFX.mp3').play();
+                    break;
+                case "HIGH":
+                    new Audio('Music/OkaySFX.mp3').play();
+                    break;
+                case "EPIC":
+                    new Audio('Music/OkaySFX.mp3').play();
+                    break;
+                case "DIVINE":
+                    new Audio('Music/GoodSFX.mp3').play();
+                    break;
+                case "UNIVERSAL":
+                    new Audio('Music/GoodSFX.mp3').play();
+                    break;
+            }
             clearInterval(interval);
             selectedAspects.push(randomAspect);
             currentAspect++;
@@ -104,11 +127,11 @@ function cycleAspect() {
             moonButton.children[0].src = 'Art/moon_basic.png'; // reset the image
 
             if (currentAspect >= aspectTypes.length) {
-                music1.pause();
-                const music2 = new Audio('Music/Battle.mp3');
-                music2.loop = true;
-                music2.play();
-                moonButton.disabled = true;
+                // Stop menu music, play battle music
+                musicMenu.pause();
+                musicBattle.play();
+                moonButton.remove()
+
                 hero.class = selectedAspects[0];
                 hero.strength = selectedAspects[1];
                 hero.speed = selectedAspects[2];
@@ -116,6 +139,9 @@ function cycleAspect() {
                 hero.ability = selectedAspects[4];
                 hero.item = selectedAspects[5];
                 
+                document.body.style.backdropFilter = "blur(10px)";
+                document.body.style.borderRadius = "15px";
+                document.body.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
                 
                 displayElement.innerHTML = 
                 // I use span here to color the text and not interfere with the HTML structure
@@ -150,6 +176,7 @@ function bossFight(hero, villain) {
 }
 //Just make 2 more of these for the next boss fights
 function startBossFight() { 
+    musicBattle.play();
     const resultDisplay = document.getElementById('battle-result');
 
     const heroObjString = localStorage.getItem('hero');
@@ -162,10 +189,13 @@ function startBossFight() {
     const didWin = bossFight(hero, villain);
 
     if (didWin) {
-        resultDisplay.innerHTML = "<strong>You beat Chikawa.</strong>";
+        resultDisplay.innerHTML = "<strong>You beat chiikawa.</strong>";
         document.querySelector('.nextPage2').style.display = 'inline-block';
     } else {
-        resultDisplay.innerHTML = "<strong>You were defeated by Chikawa. HAHA! LOSER!</strong>";
+        failed = true; 
+        fail.play();
+        musicBattle.pause();
+        resultDisplay.innerHTML = "<strong>You were defeated by chiikawa. HAHA! LOSER!</strong>";
     }
 
 }
@@ -183,10 +213,16 @@ function startBossFight2() {
     const didWin = bossFight(hero, villain);
 
     if (didWin) {
-        resultDisplay.innerHTML = "<strong>You beat Shaggy.</strong>";
+        resultDisplay.innerHTML = "<strong>You beat ethan.</strong>";
         document.querySelector('.nextPage2').style.display = 'inline-block';
     } else {
-        resultDisplay.innerHTML = "<strong>You were defeated by Shaggy. HAHA! LOSER!</strong>";
+        fail.play();
+        if (!musicBattle.paused) {
+            musicBattle.pause();
+        }
+        failed = true; 
+        musicBattle.pause();
+        resultDisplay.innerHTML = "You were defeated by Mr. ethan. <strong>-10 million participation points.</strong>";
     }
 
 }
@@ -207,7 +243,10 @@ function startBossFight3() {
         resultDisplay.innerHTML = "<strong>You beat Christopher.</strong>";
         document.querySelector('.nextPage2').style.display = 'inline-block';
     } else {
-        resultDisplay.innerHTML = "<strong>You were defeated by Christopher. HAHA! LOSER!</strong>";
+        failed = true; 
+        fail.play();
+        musicBattle.pause();
+        resultDisplay.innerHTML = "<strong>You were defeated by Christopher. You cannot defeat the JS master.</strong>";
     }
 
 }
@@ -296,22 +335,39 @@ function findAspectValue(aspects, value) {
         return 0;
     }
 }
-const music1 = new Audio('Music/Menu.mp3');
-document.querySelector('button').addEventListener('click', () => {
-    music1.loop = true;
-    music1.play();
-});
+
+
+const fail = new Audio('Music/Death.mp3');
+const musicMenu = new Audio('Music/Menu.mp3');
+const musicBattle = new Audio('Music/Battle.mp3');
+musicMenu.loop = true;
+musicBattle.loop = true;
+if (document.querySelector('.moon-button')) { // If moon button exists, add event listener
+    document.querySelector('.moon-button').addEventListener('click', () => {
+        musicMenu.play();
+    });
+}
+if (document.querySelector('.fight-button')) { // If fight button exists, add event listener
+    document.querySelector('.fight-button').addEventListener('click', () => {
+        if (!failed) {
+            musicBattle.play();
+        }
+    });
+}
+
 
 function nextPage1() {
     localStorage.setItem('hero', JSON.stringify(hero));
-    localStorage.setItem('villain', JSON.stringify(chikawa));
+    localStorage.setItem('villain', JSON.stringify(chiikawa));
 
     window.location.href = 'boss1.html';
+    console.log("hero");
+    musicBattle.play();
 }
 
 function nextPage2() {
     localStorage.setItem('hero', JSON.stringify(hero));
-    localStorage.setItem('villain2', JSON.stringify(shaggy));
+    localStorage.setItem('villain2', JSON.stringify(ethan));
 
     window.location.href = 'boss2.html';
 }
@@ -323,6 +379,12 @@ function nextPage3() {
     window.location.href = 'boss3.html';
 }
 
+function nextPage4() {
+    localStorage.setItem('hero', JSON.stringify(hero));
+    localStorage.setItem('villain3', JSON.stringify(christopher));
+
+    window.location.href = 'win.html';
+}
 
 function startGame() {
     window.location.href = 'character.html';

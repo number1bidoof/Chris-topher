@@ -3,22 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boss Battle: Shaggy</title>
+    <title>Boss Battle: The Instructor</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="battle-background">
     <div class="boss-container">
-        <h1>Boss Battle: Shaggy</h1>
+        <h1>Boss Battle: The Instructor</h1>
         
         <div class="battle-area">
             <div class="player-section">
-                <h2>Your Hero</h2>
+                <h2 id="hero-name">Your Hero</h2>
+                <span style="color: grey;">The hero</span>
+                <br>
                 <img id="player-image" src="">
             </div>
         
             <div class="boss-section">
-                <h2>Shaggy</h2>
-                <img id="boss-image" src="Art/shaggy-image.png">
+                <h2>Mr Gardner</h2>
+                <span style="color: cadetblue;">Master of the Participation Points</span>
+                <br>
+                <img id="boss-image" src="Art/Mr-Gardner.png">
             </div>
         </div>
         
@@ -27,7 +31,7 @@
             <p>Ready for Battle!</p>
         </div>
 
-        <button onclick="startBossFight2()">FIGHT</button>
+        <button class="fight-button" onclick="startBossFight2()">FIGHT</button>
         <button class="restart-button" onclick="restartGame()">RESTART</button>
         <button class="nextPage2" onclick="nextPage3()" style="display: none;">NEXT</button>
     </div>
@@ -41,6 +45,9 @@
         const classImage = document.getElementById('player-image');
         classImage.src = `Art/${hero.class.toLowerCase()}-image.png`;
         classImage.style.display = "block";
+        
+        const heroName = document.getElementById('hero-name');
+        heroName.innerHTML = hero.class; 
     }
     </script> 
 
